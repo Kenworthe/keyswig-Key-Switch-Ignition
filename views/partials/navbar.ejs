@@ -1,0 +1,33 @@
+<nav class="navbar">
+	<div class="navbar-left">
+		<ul>
+			<li><a class="home-button" href="/">Home</a></li>
+		</ul>
+	</div>
+
+	<div class="navbar-right">
+		<ul>
+			<% if (currentUser) { %>
+				<li><a href="#">My Garage</a></li>
+				<li><a href="#">Logout</a></li>
+			<% } else { %>
+				<li><a href="#">Login</a></li>
+				<li><a href="/signup">Sign Up</a></li>
+			<% } %>
+		</ul>
+	</div>
+</nav>
+
+<div class="flash">
+	<% if (typeof message !== 'undefined') { %>
+		<% if (typeof message.error !== 'undefined' && message.error.length > 0) { %>
+		<div class="card-panel red"><%= message.error %></div>
+		<% } %>
+    <% if (typeof message.info !== 'undefined' && message.info.length > 0) { %>
+    	<div class="card-panel yellow"><%= message.info %></div>
+		<% } %>
+    <% if (typeof message.success !== 'undefined' && message.success.length > 0) { %>
+		<div class="card-panel green"><%= message.success %></div>
+    	<% } %>
+	<% } %>
+</div>

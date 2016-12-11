@@ -1,13 +1,13 @@
 {
   "name": "project-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "MEN Stack App",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon ./bin/www"
   },
-  "author": "",
+  "author": "Kenneth Lin",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
     "express-session": "^1.14.2",
     "method-override": "^2.3.7",
     "mongoose": "^4.7.2",
