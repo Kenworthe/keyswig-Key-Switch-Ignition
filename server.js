@@ -23,7 +23,7 @@ var routerUsers = require('./routes/users');
 var routerCars = require('./routes/cars');
 
 // use mongoose to CONNECT to local db. change this to mlabs later.
-mongoose.connect('mongodb://localhost/coffeeshops');
+mongoose.connect('mongodb://localhost/carswap');
 
 // SET view engine
 app.set('views', path.join(__dirname, 'views'));

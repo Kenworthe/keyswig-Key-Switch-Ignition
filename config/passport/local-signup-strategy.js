@@ -6,21 +6,35 @@ var strategy = new LocalStrategy({
 	passwordField: 'password',
 	passReqToCallback: true
 },
-function(req, email, password, username, callback){
-	// Find a user with this email (using mongoose)
-	User.findOne({ 'local.email': email }, function(err, user){
-		if (err) {
+function(req, email, password, callback){
+	// ^name this 'done' or 'callback'?
+	// Find a user with this email OR displayname
+	User.findOne({ $or: [
+		{ 'local.email': email },
+		{ 'displayname': req.body.displayname }
+	]}, 
+	function(err, user){
+		console.log('Searched for obj with matching local.email or displayname: ');
+		console.log(user);
+		if (err){
 			return callback(err);
 		}
-		if (user) {
-			return callback(null, false, req.flash('error', 'This email is already taken.'));
+		else if (user){
+			if (user.local.email == true){
+				return callback(null, false, req.flash('error', 'This email is already taken.'));
+			}
+			else if (user.displayname == true){
+				return callback(null, false, req.flash('error', 'This display name is already taken.'));
+			}
 		}
 		else {
-			// Create new user if no error or email not taken.
+			// Create new user if email AND displayname not taken.
 			var newUser = new User();
 			newUser.local.email = email;
 			newUser.local.password = newUser.encrypt(password);
-			newUser.username = username;
+			newUser.displayname = req.body.displayname;
+			newUser.rating = [];
+
 			newUser.save(function(err){
 				return callback(err, newUser);
 			});

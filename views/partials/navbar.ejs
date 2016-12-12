@@ -8,11 +8,12 @@
 	<div class="navbar-right">
 		<ul>
 			<% if (currentUser) { %>
-				<li><a href="#">My Garage</a></li>
-				<li><a href="#">Logout</a></li>
+				<li><a href="#"><%= currentUser.displayname %></a></li>
+				<li><a href="/cars">Garage</a></li>
+				<li><a href="/logout">Logout</a></li>
 			<% } else { %>
-				<li><a href="#">Login</a></li>
 				<li><a href="/signup">Sign Up</a></li>
+				<li><a href="/login">Login</a></li>
 			<% } %>
 		</ul>
 	</div>

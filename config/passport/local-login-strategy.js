@@ -5,19 +5,26 @@ var strategy = new LocalStrategy({
 	usernameField: 'email',
 	passwordField: 'password',
 	passReqToCallback: true
-}, function(req, email, password, callback){
+}, 
+function(req, email, password, done){
 	User.findOne({ 'local.email': email }, function(err, user){
+		console.log('Found user obj in db: ');
+		console.log(user);
 		if (err){
-			return callback(err);
+			return done(err);
 		}
-		if (!user) {
-			return callback(null, false, req.flash('error', 'User not found.'));
+		else if (!user) {
+			console.log('checking if user is in db..');
+			return done(null, false, req.flash('error', 'User not found.'));
 		}
-		if (!user.isValidPassword(password)){
-			return callback(null, false, req.flash('error', 'Oops! Wrong email or password!'));
+		else if (!user.isValidPassword(password)){
+			console.log('validating password...');
+			return done(null, false, req.flash('error', 'Oops! Wrong email or password.'));
 		}
-		
-		return callback(null, user);
+		else {
+			console.log('-> User was found. Password matched.');
+			return done(null, user);
+		}
 	});
 });
 
