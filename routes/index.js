@@ -4,9 +4,7 @@ var passport = require('passport');
 
 // GET home page
 router.get('/', function(req, res, next){
-	let title = 'Car Swap App';
-	console.log('title:', title);
-	res.render('index.ejs', { title: title, message: req.flash() });
+	res.render('index.ejs', { title: 'Car Swap App', message: req.flash() });
 });
 
 //GET signup page

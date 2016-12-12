@@ -1,4 +1,5 @@
 var express = require('express');
+var mongoose = require('mongoose');
 var router = express.Router();
 var Car = require('../models/car.js');
 
@@ -15,8 +16,19 @@ function authenticate(req, res, next) {
 
 // GET all of user's cars.
 router.get('/', authenticate, function(req, res, next) {
-	res.render('garage.ejs', { title: 'My Garage' });
-  //need to add logic here that pulls cars data from db.
+	Car.find({ 'owner': currentUser._id })
+	.then(function(carsFound){
+		res.render('garage.ejs', { 
+			cars: carsFound, 
+			title: 'My Garage', 
+			message: req.flash() 
+		});
+	},
+	function(err) {
+		return next(err);
+	});
+
+
   //also pull data about what car is currently being swapped.
 
 });
@@ -32,8 +44,7 @@ router.post('/add', authenticate, function(req, res, next){
 	console.log(req.body);
 	console.log('-->currentUser: ');
 	console.log(currentUser);
-	req.flash('success', 'Printed car to console');
-	res.redirect('/my-garage');
+
 	// logic for POSTing new car. Need to link to Edmunds API here.
 
 	var car = new Car ({
@@ -46,8 +57,14 @@ router.post('/add', authenticate, function(req, res, next){
 		mileage: req.body.mileage,
 		description: req.body.description
 	});
-	Car.create(car);
 
+	Car.create(car)
+	.then(function(){
+		res.redirect('/my-garage')
+	},
+	function(err){
+		return next(err);
+	});
 });
 
 //GET car details page
