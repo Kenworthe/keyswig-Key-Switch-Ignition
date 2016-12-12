@@ -19,8 +19,8 @@ var session = require('express-session');
 ///////////////////
 ///////////////////
 var routerHome = require('./routes/index');
-var routerUsers = require('./routes/users');
-var routerCars = require('./routes/cars');
+var routerAccount = require('./routes/account');
+var routerGarage = require('./routes/garage');
 
 // use mongoose to CONNECT to local db. change this to mlabs later.
 mongoose.connect('mongodb://localhost/carswap');
@@ -28,7 +28,7 @@ mongoose.connect('mongodb://localhost/carswap');
 // SET view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set('layout', 'layout.ejs');
+app.set('layout', './layout/layout.ejs');
 
 // USE all middleware
 app.use(bodyParser.json());
@@ -63,8 +63,9 @@ app.use(function (req, res, next) {
 ///////////////////
 ///////////////////
 app.use('/', routerHome);
-app.use('/users', routerUsers);
-app.use('/cars', routerCars);
+app.use('/account', routerAccount);
+app.use('/my-garage', routerGarage);
+// app.use('/browse', routerBrowse);
 
 // Error handlers:
 app.use(function(err, req, res, next){

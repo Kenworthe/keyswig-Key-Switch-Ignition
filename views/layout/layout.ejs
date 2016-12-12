@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<% include partials/head.ejs %>
+	<% include ../partials/head.ejs %>
 	<!--WHY DOESN'T THIS EJS TAG BELOW WORK UPON SIGNUP/LOGIN???-->
-	<!--<title>ejs title ejs</title>-->
+	<title><%= title %></title>
 </head>
 
 <body>
 	<header>
-		<% include partials/navbar.ejs %>
+		<% include ../partials/navbar.ejs %>
 	</header>
 
 	<main>
@@ -16,7 +16,7 @@
 	</main>
 
 	<footer>
-		<% include partials/footer.ejs %>
+		<% include ../partials/footer.ejs %>
 	</footer>
 
 </body>

@@ -20,11 +20,14 @@ function(req, email, password, callback){
 			return callback(err);
 		}
 		else if (user){
-			if (user.local.email == true){
+			if (user.local.email === req.body.email){
 				return callback(null, false, req.flash('error', 'This email is already taken.'));
 			}
-			else if (user.displayname == true){
+			else if (user.displayname === req.body.displayname){
 				return callback(null, false, req.flash('error', 'This display name is already taken.'));
+			}
+			else {
+				return callback(null, false, req.flash('error', 'Not sure what happened...'));
 			}
 		}
 		else {
