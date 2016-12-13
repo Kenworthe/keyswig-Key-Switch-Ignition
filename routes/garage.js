@@ -1,6 +1,6 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var router = express.Router();
+var mongoose = require('mongoose');
 var Car = require('../models/car.js');
 
 // This function is necessary to authorize authenticated users only.
@@ -27,7 +27,7 @@ router.get('/', authenticate, function(req, res, next) {
 	function(err) {
 		return next(err);
 	});
-  //also pull data about what car is currently being swapped.
+  //need to add: also pull data about what car is currently being swapped.
 
 });
 
@@ -38,10 +38,10 @@ router.get('/add', authenticate, function(req, res, next){
 
 //POST add car data 
 router.post('/add', authenticate, function(req, res, next){
-	console.log('-->submitting new car data: ');
-	console.log(req.body);
-	console.log('-->currentUser.id: ');
-	console.log(currentUser);
+	// console.log('-->submitting new car data: ');
+	// console.log(req.body);
+	// console.log('-->currentUser.id: ');
+	// console.log(currentUser);
 
 	// logic for POSTing new car. Need to link to Edmunds API here.
 
@@ -53,6 +53,7 @@ router.post('/add', authenticate, function(req, res, next){
 		year: req.body.year,
 		licensePlate: req.body.licensePlate,
 		mileage: req.body.mileage,
+		location: currentUser.location,
 		description: req.body.description
 	});
 
@@ -67,8 +68,8 @@ router.post('/add', authenticate, function(req, res, next){
 
 //GET car details page
 router.get('/:id', authenticate, function(req, res, next){
-	console.log('GET car details page');
-	console.log(req.params.id);
+	// console.log('GET car details page');
+	// console.log(req.params.id);
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
 		console.log('GET Details. Found car: ' + carFound);
@@ -78,8 +79,8 @@ router.get('/:id', authenticate, function(req, res, next){
 
 // GET edit car page
 router.get('/:id/edit', authenticate, function(req, res, next){
-	console.log('GET edit car page');
-	console.log(req.params.id);
+	// console.log('GET edit car page');
+	// console.log(req.params.id);
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
 		console.log('GET Edit Page. Found car: ' + carFound);
@@ -88,11 +89,8 @@ router.get('/:id/edit', authenticate, function(req, res, next){
 });
 
 router.put('/:id/edit', authenticate, function(req, res, next){
-	console.log('-->submitting edit car data: ');
-	console.log(req.body);
-
-	var editCar = 
-
+	// console.log('-->submitting edit car data: ');
+	// console.log(req.body);
 
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){

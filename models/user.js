@@ -7,7 +7,7 @@ var UserSchema = new mongoose.Schema({
 		password: 	{ type: String, required: true }
 	},
 	displayname: 	{ type: String, required: true },
-	location: 		{ type: String },
+	location: 		{ type: String, required: true },
 	bio: 			{ type: String },
 	rating: 		{ type: Array }
 	},

@@ -9,6 +9,7 @@ var CarSchema = new mongoose.Schema({
 	year: 			{ type: Number, required: true },
 	licensePlate: 	{ type: String },
 	mileage: 		{ type: Number },
+	location:		{ type: String, required: true },
 	description: 	{ type: String }
 });
 

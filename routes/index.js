@@ -2,9 +2,31 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
+var Car = require('../models/car.js');
+
 // GET home page
 router.get('/', function(req, res, next){
-	res.render('index.ejs', { title: 'Car Swap App', message: req.flash() });
+	//Find all cars in Cars db except for currentuser's cars.
+	if (currentUser){
+		Car.find({owner: {$ne: currentUser._id } })
+		.then(function(allCars){
+			res.render('index.ejs', { 
+				cars: allCars, 
+				title: 'CarSwap', 
+				message: req.flash() 
+			});
+		},
+		function(err) {
+			return next(err);
+		});
+	}
+	else {
+		res.render('index.ejs', {
+			cars: null,
+			title: 'CarSwap',
+			message: req.flash()
+		});
+	}
 });
 
 //GET signup page

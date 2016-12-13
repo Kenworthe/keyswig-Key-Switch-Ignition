@@ -36,6 +36,7 @@ function(req, email, password, callback){
 			newUser.local.email = email;
 			newUser.local.password = newUser.encrypt(password);
 			newUser.displayname = req.body.displayname;
+			newUser.location = req.body.location;
 			newUser.rating = [];
 
 			newUser.save(function(err){

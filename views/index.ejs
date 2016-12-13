@@ -3,7 +3,24 @@
 <div>
 	<h1>Welcome, <%= currentUser.displayname %>!</h1>
 	<p>Browse for cars: </p>
-	<p>insert list of cars here.</p>
+	
+	<% cars.forEach(function(car) { %>
+	<a href="/contact/:id">
+		<div class="card red lighten-2">
+			<div class="card-content white-text">
+				<span><%= car.make %> <%= car.model %></span>
+				<ul>
+					<li>Year: <%= car.year %></li>
+					<li>Mileage: <%= car.mileage %></li>
+					<li>Location: <%= car.location %></li>
+					<li>Description: <%= car.description %></li>
+				</ul>
+			</div>
+		</div>
+	</a>
+	<% }) %>
+
+
 </div>
 
 <% } else { %>
