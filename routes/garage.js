@@ -90,7 +90,26 @@ router.get('/:id/edit', authenticate, function(req, res, next){
 router.put('/:id/edit', authenticate, function(req, res, next){
 	console.log('-->submitting edit car data: ');
 	console.log(req.body);
-	//redirect to /my-garage
+
+	var editCar = 
+
+
+	Car.findOne({ _id: req.params.id })
+	.then(function(carFound){
+		carFound.make = 		req.body.make;
+		carFound.model = 		req.body.model,
+		carFound.year = 		req.body.year;
+		carFound.licensePlate = req.body.licensePlate;
+		carFound.mileage = 		req.body.mileage;
+		carFound.description = 	req.body.description;
+		carFound.save();
+	})
+	.then(function(saved){
+		res.redirect('/my-garage');
+	})
+	.catch(function(err){
+		return next(err);
+	});
 })
 
 router.delete('/:id', authenticate, function(req, res, next){
