@@ -4,4 +4,10 @@
 	<p><%= car %></p>
 </div>
 
-<a href="/my-garage/<%= car._id %>/edit">Edit</a>
+<form action="/my-garage/<%= car._id %>/edit">
+	<button type="submit" class="">Edit</button>
+</form>
+
+<form method="POST" action="/my-garage/<%= car._id %>?_method=DELETE">
+	<button type="submit" class="">Delete</button>
+</form>

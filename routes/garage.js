@@ -9,6 +9,13 @@ function authenticate(req, res, next) {
 		req.flash('error', 'Please signup or login.');
 		res.redirect('/');
 	}
+	//check if currentuser ID matches car owner ID, if it's a car page.
+	// if(req.params.id){
+	// 	var checkCar = Car.find({ })
+	// 	if (currentUser._id != Car.owner){
+
+	// 	}
+	// }
 	else {
 		next();
 	}
@@ -72,8 +79,11 @@ router.get('/:id', authenticate, function(req, res, next){
 	// console.log(req.params.id);
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
-		console.log('GET Details. Found car: ' + carFound);
+		// console.log('GET Details. Found car: ' + carFound);
 		res.render('car-details.ejs', { car: carFound, title: 'Car Details' })
+	})
+	.catch(function(err){
+		return next(err);
 	});
 });
 
@@ -85,12 +95,15 @@ router.get('/:id/edit', authenticate, function(req, res, next){
 	.then(function(carFound){
 		console.log('GET Edit Page. Found car: ' + carFound);
 		res.render('car-edit.ejs', { car: carFound, title: 'Edit Car Details' })
+	})
+	.catch(function(err){
+		return next(err);
 	});
 });
 
 router.put('/:id/edit', authenticate, function(req, res, next){
-	// console.log('-->submitting edit car data: ');
-	// console.log(req.body);
+	console.log('-->submitting edit car data: ');
+	console.log(req.body);
 
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
@@ -102,17 +115,27 @@ router.put('/:id/edit', authenticate, function(req, res, next){
 		carFound.description = 	req.body.description;
 		carFound.save();
 	})
-	.then(function(saved){
+	.then(function(savedCar){
 		res.redirect('/my-garage');
 	})
 	.catch(function(err){
 		return next(err);
 	});
-})
+});
 
 router.delete('/:id', authenticate, function(req, res, next){
 	console.log('--> Submitting car data for deletion: ');
 	console.log(req.params.id);
-})
+	Car.findByIdAndRemove({ _id: req.params.id })
+	.then(function(removedCar){
+		res.redirect('/my-garage');
+	})
+	.catch(function(err){
+		return next(err);
+	},
+	function(err){
+		return next(err);
+	});
+});
 
 module.exports = router;
