@@ -41,7 +41,7 @@ app.use(methodOverride('_method'));
 
 // USE session ID cookies and passport
 app.use(session({ secret: 'test cookie',
-				  cookie: { maxAge: 2628000000 },
+				  cookie: { maxAge: 30*24*60*60*1000 },
 				  resave: true,
 				  saveUninitialized: true }));
 app.use(passport.initialize());

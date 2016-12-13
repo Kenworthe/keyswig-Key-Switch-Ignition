@@ -1,8 +1,8 @@
-<h1> My Garage index page. </h1>
-<p> this will contain the garage of cars. </p>
+<h1> My Garage</h1>
+<p> Garage index page. this will contain the garage of cars. </p>
 <p><a href="/my-garage/add">Add</a></p>
 
-<h2>My Cars</h2>
+<h3>My Cars</h3>
 
 <% cars.forEach(function(car) { %>
 	<a href="/my-garage/<%= car._id %>">
@@ -13,11 +13,12 @@
 					<li>Year: <%= car.year %></li>
 					<li>Mileage: <%= car.mileage %></li>
 					<li>License Plate: <%= car.licensePlate %></li>
+					<li>Description: <%= car.description %></li>
 				</ul>
 			</div>
 		</div>
 	</a>
 <% }) %>
 
-<!--<p><a href="/my-garage/:id/edit">Edit</a></p>
-<p><a href="/my-garage/:id/delete">Remove</a></p>-->
+<!--If current swap exists, then display:-->
+<h3>Current Swap</h3>

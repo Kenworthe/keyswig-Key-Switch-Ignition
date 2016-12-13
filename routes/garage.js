@@ -27,8 +27,6 @@ router.get('/', authenticate, function(req, res, next) {
 	function(err) {
 		return next(err);
 	});
-
-
   //also pull data about what car is currently being swapped.
 
 });
@@ -42,7 +40,7 @@ router.get('/add', authenticate, function(req, res, next){
 router.post('/add', authenticate, function(req, res, next){
 	console.log('-->submitting new car data: ');
 	console.log(req.body);
-	console.log('-->currentUser: ');
+	console.log('-->currentUser.id: ');
 	console.log(currentUser);
 
 	// logic for POSTing new car. Need to link to Edmunds API here.
@@ -60,7 +58,7 @@ router.post('/add', authenticate, function(req, res, next){
 
 	Car.create(car)
 	.then(function(){
-		res.redirect('/my-garage')
+		res.redirect('/my-garage');
 	},
 	function(err){
 		return next(err);
@@ -69,20 +67,35 @@ router.post('/add', authenticate, function(req, res, next){
 
 //GET car details page
 router.get('/:id', authenticate, function(req, res, next){
-	res.render('car-details.ejs', { title: 'Add Car' }); // req.params.id
+	console.log('GET car details page');
+	console.log(req.params.id);
+	Car.findOne({ _id: req.params.id })
+	.then(function(carFound){
+		console.log('GET Details. Found car: ' + carFound);
+		res.render('car-details.ejs', { car: carFound, title: 'Car Details' })
+	});
 });
 
-// GET edit car details page
+// GET edit car page
 router.get('/:id/edit', authenticate, function(req, res, next){
-	res.render('car-edit.ejs');
+	console.log('GET edit car page');
+	console.log(req.params.id);
+	Car.findOne({ _id: req.params.id })
+	.then(function(carFound){
+		console.log('GET Edit Page. Found car: ' + carFound);
+		res.render('car-edit.ejs', { car: carFound, title: 'Edit Car Details' })
+	});
 });
 
-router.post('/:id/edit', authenticate, function(req, res, next){
+router.put('/:id/edit', authenticate, function(req, res, next){
 	console.log('-->submitting edit car data: ');
 	console.log(req.body);
 	//redirect to /my-garage
 })
 
-router.delete('/:id/delete')
+router.delete('/:id', authenticate, function(req, res, next){
+	console.log('--> Submitting car data for deletion: ');
+	console.log(req.params.id);
+})
 
 module.exports = router;
