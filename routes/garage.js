@@ -142,9 +142,6 @@ router.delete('/:id', authenticate, function(req, res, next){
 	})
 	.catch(function(err){
 		return next(err);
-	},
-	function(err){
-		return next(err);
 	});
 });
 

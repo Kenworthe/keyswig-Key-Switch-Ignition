@@ -1,11 +1,13 @@
-<nav class="navbar">
-	<div class="nav-wrapper blue-grey darken-3">
-		<a class="left brand-logo" href="/">Home</a>
+<header class="navbar-fixed">
+<nav class="blue navbar">
+	<div class="nav-wrapper">
+		<a class="left brand-logo" href="/">Home<i class="fa fa-car" aria-hidden="true"></i></a>
 		<ul class="right hide-on-small-and-down">
 			<% if (currentUser) { %>
 				<li><a href="/my-garage">My Garage</a></li>
-				<li><a href="#" class="dropdown-button" data-activates="dropdown1" data-beloworigin="true" data-hover="true"><%= currentUser.displayname %></a></li>
+				<li><a href="#" class="dropdown-button" data-activates="dropdown1" data-beloworigin="true" data-hover="true"><%= currentUser.displayname %><i class="material-icons right">arrow_drop_down</i></a></li>
 					<ul id="dropdown1" class="dropdown-content">
+						<li><a href="/" class="blue-grey darken-2 white-text">Browse</a></li>
 						<li><a href="/account" class="blue-grey darken-2 white-text">Account</a></li>
 						<li><a href="/logout" class="blue-grey darken-2 white-text">Logout</a></li>
 					</ul>
@@ -17,6 +19,8 @@
 		</ul>
 	</div>
 </nav>
+</header>
+
 
 <div class="flash">
 	<% if (typeof message !== 'undefined') { %>
