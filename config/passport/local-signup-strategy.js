@@ -7,15 +7,12 @@ var strategy = new LocalStrategy({
 	passReqToCallback: true
 },
 function(req, email, password, callback){
-	// ^name this 'done' or 'callback'?
 	// Find a user with this email OR displayname
 	User.findOne({ $or: [
 		{ 'local.email': email },
 		{ 'displayname': req.body.displayname }
 	]}, 
 	function(err, user){
-		console.log('Searched for obj with matching local.email or displayname: ');
-		console.log(user);
 		if (err){
 			return callback(err);
 		}
@@ -40,7 +37,7 @@ function(req, email, password, callback){
 			newUser.rating = [];
 
 			newUser.save(function(err){
-				return callback(err, newUser);
+				return callback(err, newUser, req.flash('success', 'Signup Complete! Head to your Garage to add your cars!'));
 			});
 		}
 	});

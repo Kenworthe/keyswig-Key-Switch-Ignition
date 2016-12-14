@@ -3,11 +3,13 @@ html, body {
 	height: 100%;
 }
 
-.navbar {
+/*.navbar {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-}
-.navbar * :hover {
-	background: lightgray;
-}
+	background: rgba(0,0,0,);
+	color: red;
+}*/
+/*ul.navbar:hover, li.navbar:hover {
+	background: white;
+}*/

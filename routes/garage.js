@@ -9,13 +9,6 @@ function authenticate(req, res, next) {
 		req.flash('error', 'Please signup or login.');
 		res.redirect('/');
 	}
-	//check if currentuser ID matches car owner ID, if it's a car page.
-	// if(req.params.id){
-	// 	var checkCar = Car.find({ })
-	// 	if (currentUser._id != Car.owner){
-
-	// 	}
-	// }
 	else {
 		next();
 	}
@@ -35,7 +28,24 @@ router.get('/', authenticate, function(req, res, next) {
 		return next(err);
 	});
   //need to add: also pull data about what car is currently being swapped.
+});
 
+// GET isSwappable Toggle
+router.get('/:id/toggle', authenticate, function(req, res, next) {
+	Car.findOne({ _id: req.params.id }, function(err, car){
+		if (!car){
+			return next(err);
+		}
+		else {
+			car.isSwappable = !car.isSwappable;
+			return car.save();
+		}
+	})
+    .then(function(saved) {
+      res.redirect('/my-garage');
+    }, function(err) {
+      return next(err);
+    });
 });
 
 // GET add car form
@@ -45,23 +55,20 @@ router.get('/add', authenticate, function(req, res, next){
 
 //POST add car data 
 router.post('/add', authenticate, function(req, res, next){
-	// console.log('-->submitting new car data: ');
-	// console.log(req.body);
-	// console.log('-->currentUser.id: ');
-	// console.log(currentUser);
-
 	// logic for POSTing new car. Need to link to Edmunds API here.
-
 	var car = new Car ({
-		owner: currentUser._id,
-		borrower: null,
-		make: req.body.make,
-		model: req.body.model,
-		year: req.body.year,
-		licensePlate: req.body.licensePlate,
-		mileage: req.body.mileage,
-		location: currentUser.location,
-		description: req.body.description
+		owner: 			currentUser._id,
+		borrower: 		null,
+		isSwappable:	true,
+		make: 			req.body.make,
+		model: 			req.body.model,
+		year: 			req.body.year,
+		transmission:	req.body.transmission,
+		color: 			req.body.color,
+		licensePlate: 	req.body.licensePlate,
+		mileage: 		req.body.mileage,
+		location: 		currentUser.location,
+		description: 	req.body.description
 	});
 
 	Car.create(car)
@@ -75,12 +82,15 @@ router.post('/add', authenticate, function(req, res, next){
 
 //GET car details page
 router.get('/:id', authenticate, function(req, res, next){
-	// console.log('GET car details page');
-	// console.log(req.params.id);
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
-		// console.log('GET Details. Found car: ' + carFound);
-		res.render('car-details.ejs', { car: carFound, title: 'Car Details' })
+		if (carFound.owner.toString() !== currentUser._id.toString()) {
+			req.flash('error', 'Car ID does not match Owner ID.');
+			res.redirect('/my-garage');
+		}
+		else {
+			res.render('car-details.ejs', { car: carFound, title: 'Car Details' })
+		}
 	})
 	.catch(function(err){
 		return next(err);
@@ -88,28 +98,30 @@ router.get('/:id', authenticate, function(req, res, next){
 });
 
 // GET edit car page
-router.get('/:id/edit', authenticate, function(req, res, next){
-	// console.log('GET edit car page');
-	// console.log(req.params.id);
+router.get('/:id/edit', authenticate, function(req, res, next) {
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
-		console.log('GET Edit Page. Found car: ' + carFound);
-		res.render('car-edit.ejs', { car: carFound, title: 'Edit Car Details' })
+		if (carFound.owner.toString() !== currentUser._id.toString()) {
+			req.flash('error', 'Car ID does not match Owner ID.');
+			res.redirect('/my-garage/');
+		}
+		else {
+			res.render('car-edit.ejs', { car: carFound, title: 'Edit Car Details' });
+		}
 	})
 	.catch(function(err){
 		return next(err);
 	});
 });
 
-router.put('/:id/edit', authenticate, function(req, res, next){
-	console.log('-->submitting edit car data: ');
-	console.log(req.body);
-
+router.put('/:id/edit', authenticate, function(req, res, next) {
 	Car.findOne({ _id: req.params.id })
 	.then(function(carFound){
 		carFound.make = 		req.body.make;
-		carFound.model = 		req.body.model,
+		carFound.model = 		req.body.model;
 		carFound.year = 		req.body.year;
+		carFound.color = 		req.body.color;
+		carFound.transmission = req.body.transmission;
 		carFound.licensePlate = req.body.licensePlate;
 		carFound.mileage = 		req.body.mileage;
 		carFound.description = 	req.body.description;
@@ -124,8 +136,6 @@ router.put('/:id/edit', authenticate, function(req, res, next){
 });
 
 router.delete('/:id', authenticate, function(req, res, next){
-	console.log('--> Submitting car data for deletion: ');
-	console.log(req.params.id);
 	Car.findByIdAndRemove({ _id: req.params.id })
 	.then(function(removedCar){
 		res.redirect('/my-garage');

@@ -7,9 +7,12 @@ var CarSchema = new mongoose.Schema({
 	make: 			{ type: String, required: true },
 	model: 			{ type: String, required: true },
 	year: 			{ type: Number, required: true },
+	color:			{ type: String },
+	transmission:	{ type: String },
+	location:		{ type: String, required: true },
 	licensePlate: 	{ type: String },
 	mileage: 		{ type: Number },
-	location:		{ type: String, required: true },
+	isSwappable: 	{ type: Boolean },
 	description: 	{ type: String }
 });
 

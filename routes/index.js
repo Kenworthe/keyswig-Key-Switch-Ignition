@@ -1,15 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-
 var Car = require('../models/car.js');
+var User = require('../models/user.js');
+
+// This function is necessary to authorize authenticated users only.
+function authenticate(req, res, next) {
+	if(!req.isAuthenticated()) {
+		req.flash('error', 'Please signup or login.');
+		res.redirect('/');
+	}
+	else {
+		next();
+	}
+}
 
 // GET home page
 router.get('/', function(req, res, next){
-	//Find all cars in Cars db except for currentuser's cars.
 	if (currentUser){
-		Car.find({owner: {$ne: currentUser._id } })
+		Car.find({ owner: {$ne: currentUser._id} }).populate('owner')
 		.then(function(allCars){
+			console.log(allCars[0]);
 			res.render('index.ejs', { 
 				cars: allCars, 
 				title: 'CarSwap', 
@@ -21,7 +32,7 @@ router.get('/', function(req, res, next){
 		});
 	}
 	else {
-		res.render('index.ejs', {
+		res.render('landing.ejs', {
 			cars: null,
 			title: 'CarSwap',
 			message: req.flash()
@@ -42,6 +53,7 @@ router.post('/signup', function(req, res, next){
 	var signupStrat = passport.authenticate('local-signup', {
 		successRedirect: '/',
 		failureRedirect: '/signup',
+		successFlash: true,
 		failureFlash: true
 	});
 	return signupStrat(req, res, next);
@@ -66,6 +78,30 @@ router.post('/login', function(req, res, next){
 router.get('/logout', function(req, res, next) {
   req.logout();
   res.redirect('/');
+});
+
+//GET contact page.
+router.get('/contact/:id', authenticate, function(req, res, next){
+	User.findOne({ _id: req.params.id }, function(err, foundUser){
+		if (err) {
+			return next(err);
+		}
+		var userAndCars = {};
+		userAndCars.user = foundUser;
+
+		Car.find({ owner: req.params.id }, function(err, foundCars){
+			if (err) {
+				return next(err);
+			}
+			userAndCars.cars = foundCars;
+			res.render('contact.ejs', { 
+				title: 'Contact Info',
+				user: userAndCars.user, 
+				cars: userAndCars.cars,
+				message: req.flash()
+			});
+		});
+	});
 });
 
 

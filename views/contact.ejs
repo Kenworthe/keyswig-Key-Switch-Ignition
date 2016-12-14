@@ -1,23 +1,29 @@
+<h1>Contact Info for <%= user.displayname %></h1>
+
 <div>
-	<h1>Welcome, <%= currentUser.displayname %>!</h1>
-	<p>Browse for cars: </p>
-	
+	<ul>
+		<li><%= user._id %></li>
+		<li><%= user.displayname %></li>
+		<li><%= user.local.email %></li>
+		<li><%= user.location %></li>
+		<li><%= user.bio %></li>
+	</ul>
+</div>
+
+<div>
+	<h3>Car info</h3>
+
 	<% cars.forEach(function(car) { %>
-	<% if (car.isSwappable === true ) { %>
-	<a href="/contact/<%= car.owner._id %>">
 		<div class="card red lighten-2">
 			<div class="card-content white-text">
 				<span><%= car.make %> <%= car.model %></span>
 				<ul>
 					<li>Year: <%= car.year %></li>
 					<li>Mileage: <%= car.mileage %></li>
-					<li>Location: <%= car.location %></li>
 					<li>Description: <%= car.description %></li>
-					<li>Owner: <%= car.owner.displayname %></li>
 				</ul>
 			</div>
 		</div>
-	</a>
-	<% } %>
 	<% }) %>
+
 </div>

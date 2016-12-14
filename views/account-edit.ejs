@@ -1,0 +1,49 @@
+<h1>Edit Account Details</h1>
+
+<p><%= user %></p>
+
+<form method="post" action="/account/edit?_method=PUT">
+	<!--<div class="form-group">
+		<label for="email">Email</label>
+		<input value="<%= currentUser.local.email %>" class="form-control" type="text" name="email" id="email">
+	</div>
+
+	<div class="form-group">
+		<label for="displayname">Display Name</label>
+		<input value="<%= currentUser.displayname %>" class="form-control" type="text" name="displayname" id="displayname">
+	</div>-->
+
+	<div class="form-group">
+		<label for="location">Location (City, State)</label>
+		<input value="<%= currentUser.location %>" class="form-control" type="text" name="location" id="location">
+	</div>
+
+	<div class="form-group">
+		<label for="bio">Bio</label>
+		<input value="<%= currentUser.bio %>" class="form-control" type="text" name="bio" id="bio">
+	</div>
+
+	<!--<p>Change Password</p>
+	<div class="form-group">
+		<label for="password">Current Password</label>
+		<input class="form-control" type="password" name="password" id="password">
+	</div>
+
+	<div class="form-group">
+		<label for="newPassword">New Password</label>
+		<input class="form-control" type="password" name="newPassword" id="newPassword">
+	</div>
+
+	<div class="form-group">
+		<label for="newPasswordConfirm">Confirm New Password</label>
+		<input class="form-control" type="password" name="newPasswordConfirm" id="newPasswordConfirm">
+	</div>-->
+
+	<input class="btn btn-default" type="submit" value="Submit">
+</form>
+
+
+<form method="post" action="#">
+	<p>Close Account</p>
+	<input class="btn btn-default" type="submit" value="Delete Account">
+</form>

@@ -14,6 +14,15 @@
 					<li>Mileage: <%= car.mileage %></li>
 					<li>License Plate: <%= car.licensePlate %></li>
 					<li>Description: <%= car.description %></li>
+					<li>Available to Swap?
+						<a href="/my-garage/<%= car._id %>/toggle">
+              			<% if (car.isSwappable) { %>
+                		<i class="fa fa-check-square-o" aria-hidden="true"></i>
+              			<% } else { %>
+						<i class="fa fa-square-o" aria-hidden="true"></i>
+              			<% } %>
+            			</a>
+					</li>
 				</ul>
 			</div>
 		</div>
