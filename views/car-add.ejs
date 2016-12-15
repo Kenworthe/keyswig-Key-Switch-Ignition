@@ -1,51 +1,70 @@
 <!--this page will link to edmund's API to -->
-<h1>Add car to garage</h1>
+<div class="container row center-align">
+	<h3>Add Car to your Garage</h3>
 
 <form method="post" action="/my-garage/add">
 
-	<div class="car-image">
-		<img src="#">
+	<div class="card col m8 offset-m2">
+		<div class="card-image">
+			<img class="responsive-img img-preview" src="/images/car-placeholder-0.jpg">
+		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="input-field col m8 s12 offset-m2 file-field input-field">
+    	<div class="blue btn">
+    		<span>File</span>
+    		<input type="file">
+      	</div>
+		<div class="file-path-wrapper">
+        	<input class="file-path validate" type="text" placeholder="Upload car image">
+      	</div>
+    </div>
+
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="make">Make</label>
-		<input class="form-control" type="text" name="make" id="make">
+		<input class="validate" type="text" name="make" id="make">
 	</div>
 
-	<div class="form-group">
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="model">Model</label>
-		<input class="form-control" type="text" name="model" id="model">
+		<input class="validate" type="text" name="model" id="model">
 	</div>
 
-	<div class="form-group">
+	<!--<div class="input-field col m8 s12 offset-m2">
+		<label for="trim">Trim</label>
+		<input class="validate" type="text" name="trim" id="trim">
+	</div>-->
+
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="year">Year</label>
-		<input class="form-control" type="text" name="year" id="year">
+		<input class="validate" type="text" name="year" id="year">
 	</div>
 
-	<div class="form-group">
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="color">Color</label>
-		<input class="form-control" type="text" name="color" id="color">
+		<input class="validate" type="text" name="color" id="color">
 	</div>
 
-	<div class="form-group">
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="transmission">Transmission</label>
-		<input class="form-control" type="text" name="transmission" id="transmission">
+		<input class="validate" type="text" name="transmission" id="transmission">
 	</div>
 
-	<div class="form-group">
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="mileage">Current Mileage</label>
-		<input class="form-control" type="number" name="mileage" id="mileage">
+		<input class="validate" type="number" name="mileage" id="mileage">
 	</div>
 
-	<div class="form-group">
-		<label for="licensePlate">License Plate Number</label>
-		<input class="form-control" type="text" name="licensePlate" id="licensePlate">
+	<div class="input-field col m8 s12 offset-m2">
+		<label for="licensePlate">License Plate Number (Private)</label>
+		<input class="validate" type="text" name="licensePlate" id="licensePlate">
 	</div>
 
-	<div class="form-group">
+	<div class="input-field col m8 s12 offset-m2">
 		<label for="description">Description</label>
-		<input class="form-control" type="text" name="description" id="description">
+		<textarea id="description" class="materialize-textarea" name="description" placeholder="Any mods? Special tires? Quirks? Tell others about your car!"></textarea>
 	</div>
 
-	<input class="btn btn-default" type="submit">
+	<input value="Add Car" class="col s4 offset-s4 waves-effect waves-light btn green hoverable" type="submit">
 </form>
+</div>

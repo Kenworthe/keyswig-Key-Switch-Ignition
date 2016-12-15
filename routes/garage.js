@@ -6,7 +6,7 @@ var Car = require('../models/car.js');
 // This function is necessary to authorize authenticated users only.
 function authenticate(req, res, next) {
 	if(!req.isAuthenticated()) {
-		req.flash('error', 'Please signup or login.');
+		req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
 		res.redirect('/');
 	}
 	else {

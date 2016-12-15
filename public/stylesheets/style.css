@@ -4,7 +4,6 @@ html, body {
 	width: auto;
 	color: #333333;
 }
-
 img.landing-page-bg {
 	z-index: -10;
 	position: relative;
@@ -15,22 +14,30 @@ img.landing-page-bg {
 	-webkit-user-select: none;
 	user-select: none;
 }
-
 .fa.fa-toggle-on {
 	font-size: 2em;
 }
 .fa.fa-toggle-off {
 	font-size: 2em;
 }
-
 .car-id {
 	word-wrap: break-word;
 }
-
 .new-car-btn {
-	margin: 10px;
+	margin: 20px 0;
 }
-
+/* label focus color */
+.input-field input[type=text]:focus + label {
+	color: #000;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+	border-bottom: 1px solid #FFA000;
+	box-shadow: 0 1px 0 0 #FFA000;
+}
+.delete-form {
+	display:inline;
+}
 
 /*.brand-logo:hover {
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);

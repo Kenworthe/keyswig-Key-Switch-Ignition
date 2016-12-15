@@ -1,17 +1,15 @@
 <!--this page will link to edmund's API to -->
 <div class="container row center-align">
-	<h3 class="car-id">Car Details</h3>
-	<h4>(ID: <%= car._id %>)</h4>
+	<h3 class="car-id">Update Car Details</h3>
+	<h4 class="car-id">(ID:<%= car._id %>)</h4>
 
 <form class="col s12" method="post" action="/my-garage/<%= car._id %>/edit?_method=PUT">
 
-	<div class="card">
+	<div class="card col m8 offset-m2">
 		<div class="card-image">
-			<img class="responsive-img" src="/images/cars-placeholder.jpg">
+			<img class="responsive-img img-preview" src="/images/car-placeholder-1.jpg">
 		</div>
 	</div>
-
-	<div><h3>Update Car Info</h3></div>
 
 	<div class="input-field col m8 s12 offset-m2 file-field input-field">
     	<div class="blue btn">

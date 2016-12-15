@@ -1,8 +1,7 @@
 <h1> My Garage</h1>
 
-<a class="new-car-btn green waves-effect waves-light btn" href="/my-garage/add">
-	<i class="material-icons left">plus</i>
-	<span>Add Car</span>
+<a class="new-car-btn green waves-effect waves-light btn-large" href="/my-garage/add">
+	<i class="fa fa-plus" aria-hidden="true"></i> Add Car
 </a>
 
 <div class="row">
@@ -12,7 +11,7 @@
 		<div class="card hoverable">
 
 		<div class="card-image waves-effect waves-block waves-light">
-			<img src="/images/cars-placeholder.jpg">
+			<img src="/images/car-placeholder-1.jpg">
 		</div>
 
 		<div class="card-content">
@@ -44,7 +43,9 @@
 
 		<div class="card-action">
 			<a class="blue white-text waves-effect waves-light btn-flat" href="/my-garage/<%= car._id %>/edit">Update</a>
-			<a class="red darken-1 white-text waves-effect waves-light btn-flat" href="/my-garage/<%= car._id %>/delete">Remove</a>
+			<form class="delete-form" method="POST" action="/my-garage/<%= car._id %>?_method=DELETE">
+				<button type="submit" class="red darken-1 white-text waves-effect waves-light btn-flat">Remove</button>
+			</form>
 		</div>
 		</div>
 	</div>
