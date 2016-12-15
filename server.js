@@ -22,8 +22,24 @@ var routerHome = require('./routes/index');
 var routerAccount = require('./routes/account');
 var routerGarage = require('./routes/garage');
 
-// use mongoose to CONNECT to local db. change this to mlabs later.
-mongoose.connect('mongodb://localhost/carswap');
+
+// Connect to database: mlabs OR localhost
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+  mongoose.connect('mongodb://localhost/carswap');
+}
+mongoose.connection.on('error', function(err) {
+  console.error('MongoDB connection error: ' + err);
+  process.exit(-1);
+  }
+);
+mongoose.connection.once('open', function() {
+  console.log("Mongoose has connected to MongoDB!");
+});
+
+
 
 // SET view engine
 app.set('views', path.join(__dirname, 'views'));
