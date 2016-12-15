@@ -14,9 +14,9 @@ function authenticate(req, res, next) {
 	}
 }
 
-// GET all of user's cars.
+// GET garage, all of user's cars.
 router.get('/', authenticate, function(req, res, next) {
-	Car.find({ 'owner': currentUser._id })
+	Car.find({ 'owner': currentUser._id }).populate('owner')
 	.then(function(carsFound){
 		res.render('garage.ejs', { 
 			cars: carsFound, 
@@ -106,7 +106,7 @@ router.get('/:id/edit', authenticate, function(req, res, next) {
 			res.redirect('/my-garage/');
 		}
 		else {
-			res.render('car-edit.ejs', { car: carFound, title: 'Edit Car Details' });
+			res.render('car-edit.ejs', { car: carFound, title: 'Edit Car' });
 		}
 	})
 	.catch(function(err){

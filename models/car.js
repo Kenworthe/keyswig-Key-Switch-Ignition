@@ -3,7 +3,7 @@ var User = require('./user.js');
 
 var CarSchema = new mongoose.Schema({
 	owner: 			{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-	borrower: 		{ type: String },
+	borrower: 		{ type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 	make: 			{ type: String, required: true },
 	model: 			{ type: String, required: true },
 	year: 			{ type: Number, required: true },

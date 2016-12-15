@@ -23,7 +23,7 @@ router.get('/', function(req, res, next){
 			console.log(allCars[0]);
 			res.render('index.ejs', { 
 				cars: allCars, 
-				title: 'CarSwap', 
+				title: 'keyswig', 
 				message: req.flash() 
 			});
 		},
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next){
 	else {
 		res.render('landing.ejs', {
 			cars: null,
-			title: 'CarSwap',
+			title: 'keyswig',
 			message: req.flash()
 		});
 	}
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next){
 
 //GET signup page
 router.get('/signup', function(req, res, next){
-	res.render('signup.ejs', { title: 'User Registration', message: req.flash() });
+	res.render('signup.ejs', { title: 'Sign Up', message: req.flash() });
 });
 
 //POST signup -> check passport
@@ -95,7 +95,7 @@ router.get('/contact/:id', authenticate, function(req, res, next){
 			}
 			userAndCars.cars = foundCars;
 			res.render('contact.ejs', { 
-				title: 'Contact Info',
+				title: 'Contact Owner',
 				user: userAndCars.user, 
 				cars: userAndCars.cars,
 				message: req.flash()
