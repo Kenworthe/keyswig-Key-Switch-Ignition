@@ -1,25 +1,39 @@
 <header class="navbar-fixed">
 <nav class="blue navbar">
 	<div class="nav-wrapper">
-		<ul class="left">
+		<ul class="logo-box left">
 			<li><a class="brand-logo" href="/">keyswig<i class="fa fa-car" aria-hidden="true"></i></a></li>
-			<li><p>key.switch.ignition.</p></li>
+			<!--<li><p>key.switch.ignition.</p></li>-->
 		</ul>
-		<ul class="right hide-on-small-and-down">
-			<% if (currentUser) { %>
+		<% if (currentUser) { %>
+		<a href="#" data-activates="hamburger1" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
 				<li><a href="/my-garage">My Garage</a></li>
 				<li><a href="#" class="dropdown-button" data-activates="dropdown1" data-beloworigin="true" data-hover="true"><%= currentUser.displayname %><i class="material-icons right">arrow_drop_down</i></a></li>
-					<ul id="dropdown1" class="blue-grey darken-1 dropdown-content">
-						<li><a href="/" class="white-text">Browse</a></li>
-						<li><a href="/account" class="white-text">Account</a></li>
-						<li><a href="/logout" class="white-text">Logout</a></li>
-					</ul>
+				<ul id="dropdown1" class="blue-grey darken-1 dropdown-content">
+					<li><a href="/" class="white-text">Browse</a></li>
+					<li><a href="/account" class="white-text">Account</a></li>
+					<li><a href="/logout" class="white-text">Logout</a></li>
+				</ul>
+			</ul>
+		<ul class="side-nav" id="hamburger1">
+			<li><a href="/">Browse</a></li>
+			<li><a href="/my-garage">My Garage</a></li>
+			<li><a href="/account">Account</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</ul>
 
-			<% } else { %>
+		<% } else { %>
+		<a href="#" data-activates="hamburger2" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
 				<li><a href="/signup">Sign Up</a></li>
 				<li><a href="/login">Login</a></li>
-			<% } %>
+			</ul>
+		<ul class="side-nav" id="hamburger2">
+			<li><a href="/signup">Sign Up</a></li>
+			<li><a href="/login">Login</a></li>
 		</ul>
+		<% } %>
 	</div>
 </nav>
 </header>
