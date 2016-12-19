@@ -2,10 +2,10 @@
 **By: Kenneth Lin**
 ***********************
 
-![](screenshot.jpg) 
+![](https://www.dropbox.com/s/y6v93egakuxuwxi/Screen%20Shot%202016-12-15%20at%202.23.34%20PM.png?dl=0) 
 
 ## Overview: 
-Keyswig (Key.Switch.Ignition) is a social platform aiming to bring local auto communities closer together through driver meetups and car switching!.
+Keyswig (Key.Switch.Ignition) is a social platform aiming to bring local auto communities closer together through driver meetups and car switching.
 
 ## Check it out here: 
 
