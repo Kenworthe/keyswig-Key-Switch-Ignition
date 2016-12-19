@@ -1,17 +1,3 @@
-Necessary Deliverables
-
-A working web application, hosted somewhere on the internet
-A link to your hosted working app in the URL section of your Github repo
-A Git repository hosted on Github, with a link to your hosted project, and frequent commits dating back to the very beginning of the project
-A readme.md file with:
-Explanations of the technologies used
-A couple paragraphs about the general approach you took
-Installation instructions for any dependencies
-Link to your user stories – who are your users, what do they want, and why?
-Link to your wireframes – sketches of major views / interfaces in your application
-Descriptions of any unsolved problems or major hurdles you had to overcome
-Future vision for the project
-
 # keyswig - Key.Switch.Ignition
 **By: Kenneth Lin**
 ***********************
