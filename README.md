@@ -37,11 +37,16 @@ https://keyswig.herokuapp.com/
 ## Technologies Used: 
 
 **Frameworks & Libraries:**
-* Node.js
 * Express.js
 * Mongoose
 * jQuery
 * Materialize
+
+**Server:**
+* Node.js
+
+**Database:**
+* MongoDB
 
 **Key Middleware**
 * Passport
@@ -57,9 +62,6 @@ https://keyswig.herokuapp.com/
 **Hosting:** 
 * Heroku
 * mlab
-
-**Database:**
-* MongoDB
 
 **Tools:** 
 * Git/GitHub (https://github.com/Kenworthe/keyswig-Key-Switch-Ignition)
